@@ -1,7 +1,7 @@
 package com.sqldemo.demo.Controller;
 
-import com.sqldemo.demo.Repo.UserRepo;
-import com.sqldemo.demo.Model.User;
+import com.sqldemo.demo.Repo.UsersRepo;
+import com.sqldemo.demo.Model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MysqlCURD {
 	
 	@Autowired
-  	private UserRepo userRepository;
+  	private UsersRepo usersRepository;
 	
 	@PostMapping(path="/add")
 	public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
-		User n = new User();
+		Users n = new Users();
 		n.setName(name);
 		n.setEmail(email);
-		userRepository.save(n);
+		usersRepository.save(n);
 		return "Saved";
   }
 
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		return userRepository.findAll();
+	public @ResponseBody Iterable<Users> getAllUsers() {
+		return usersRepository.findAll();
 	}
 }
